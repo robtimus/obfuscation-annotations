@@ -122,7 +122,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class BooleanArrayToString extends ForValueType<boolean[]> {
+    final class BooleanArrayToString extends TypeSpecific<boolean[]> {
 
         /** The single instance. */
         public static final BooleanArrayToString INSTANCE = new BooleanArrayToString();
@@ -148,7 +148,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class CharArrayToString extends ForValueType<char[]> {
+    final class CharArrayToString extends TypeSpecific<char[]> {
 
         /** The single instance. */
         public static final CharArrayToString INSTANCE = new CharArrayToString();
@@ -174,7 +174,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class ByteArrayToString extends ForValueType<byte[]> {
+    final class ByteArrayToString extends TypeSpecific<byte[]> {
 
         /** The single instance. */
         public static final ByteArrayToString INSTANCE = new ByteArrayToString();
@@ -200,7 +200,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class ShortArrayToString extends ForValueType<short[]> {
+    final class ShortArrayToString extends TypeSpecific<short[]> {
 
         /** The single instance. */
         public static final ShortArrayToString INSTANCE = new ShortArrayToString();
@@ -226,7 +226,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class IntArrayToString extends ForValueType<int[]> {
+    final class IntArrayToString extends TypeSpecific<int[]> {
 
         /** The single instance. */
         public static final IntArrayToString INSTANCE = new IntArrayToString();
@@ -252,7 +252,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class LongArrayToString extends ForValueType<long[]> {
+    final class LongArrayToString extends TypeSpecific<long[]> {
 
         /** The single instance. */
         public static final LongArrayToString INSTANCE = new LongArrayToString();
@@ -278,7 +278,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class FloatArrayToString extends ForValueType<float[]> {
+    final class FloatArrayToString extends TypeSpecific<float[]> {
 
         /** The single instance. */
         public static final FloatArrayToString INSTANCE = new FloatArrayToString();
@@ -304,7 +304,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class DoubleArrayToString extends ForValueType<double[]> {
+    final class DoubleArrayToString extends TypeSpecific<double[]> {
 
         /** The single instance. */
         public static final DoubleArrayToString INSTANCE = new DoubleArrayToString();
@@ -330,7 +330,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class ObjectArrayToString extends ForValueType<Object[]> {
+    final class ObjectArrayToString extends TypeSpecific<Object[]> {
 
         /** The single instance. */
         public static final ObjectArrayToString INSTANCE = new ObjectArrayToString();
@@ -356,7 +356,7 @@ public interface StringRepresentationProvider {
      *
      * @author Rob Spoor
      */
-    final class ObjectArrayDeepToString extends ForValueType<Object[]> {
+    final class ObjectArrayDeepToString extends TypeSpecific<Object[]> {
 
         /** The single instance. */
         public static final ObjectArrayDeepToString INSTANCE = new ObjectArrayDeepToString();
@@ -383,12 +383,12 @@ public interface StringRepresentationProvider {
      * @author Rob Spoor
      * @param <T> The type for which to return a specific string representation.
      */
-    abstract class ForValueType<T> implements StringRepresentationProvider {
+    abstract class TypeSpecific<T> implements StringRepresentationProvider {
 
-        private final Class<T> valueType;
+        private final Class<T> type;
 
-        protected ForValueType(Class<T> valueType) {
-            this.valueType = valueType;
+        protected TypeSpecific(Class<T> type) {
+            this.type = type;
         }
 
         protected abstract Supplier<? extends CharSequence> typeSpecificStringRepresentation(T value);
@@ -396,8 +396,8 @@ public interface StringRepresentationProvider {
         @Override
         public Supplier<? extends CharSequence> stringRepresentation(Object value) {
             Objects.requireNonNull(value);
-            return valueType.isInstance(value)
-                    ? typeSpecificStringRepresentation(valueType.cast(value))
+            return type.isInstance(value)
+                    ? typeSpecificStringRepresentation(type.cast(value))
                     : value::toString;
         }
     }
