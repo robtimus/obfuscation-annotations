@@ -6,18 +6,18 @@ Contains general purpose annotations for [obfuscation-core](https://robtimus.git
 
 ### Annotations for creating Obfuscators
 
-* `ObfuscateAll` represents [Obfuscator.all](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#all-char-).
-* `ObfuscateNone` represents [Obfuscator.none](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#none--).
-* `ObfuscateFixedLength` represents [Obfuscator.fixedLength](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#fixedLength-int-char-).
-* `ObfuscateFixedValue` represents [Obfuscator.fixedValue](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#fixedValue-java.lang.String-).
-* `ObfuscatePortion` represents [Obfuscator.portion](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#portion--).
-* `ObfuscateUsing` allows you to provide custom `Obfuscator` implementations. This is done through implementations of [ObfuscatorProvider](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorProvider.html).
+* [ObfuscateAll](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscateAll.html) represents [Obfuscator.all](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#all-char-).
+* [ObfuscateNone](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscateNone.html) represents [Obfuscator.none](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#none--).
+* [ObfuscateFixedLength](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscateFixedLength.html) represents [Obfuscator.fixedLength](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#fixedLength-int-char-).
+* [ObfuscateFixedValue](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscateFixedValue.html) represents [Obfuscator.fixedValue](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#fixedValue-java.lang.String-).
+* [ObfuscatePortion](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatePortion.html) represents [Obfuscator.portion](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#portion--).
+* [ObfuscateUsing](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscateUsing.html) allows you to provide custom [Obfuscator](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html) implementations. This is done through implementations of [ObfuscatorProvider](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorProvider.html).
 
 To help with converting these annotations to `Obfuscator` instances you can use [ObfuscatorFactory](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorFactory.html)
 
 ### Annotations for obfuscating objects
 
-* `RepresentedBy` allows you to provide a custom string representation. This can be used with [Obfuscator.obfuscateObject](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#obfuscateObject-T-java.util.function.Supplier-). This is done through implementations of [StringRepresentationProvider](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/StringRepresentationProvider.html).
+* [RepresentedBy](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/RepresentedBy.html) allows you to provide a custom string representation. This can be used with [Obfuscator.obfuscateObject](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#obfuscateObject-T-java.util.function.Supplier-). This is done through implementations of [StringRepresentationProvider](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/StringRepresentationProvider.html).
 
 ## Known framework support
 
