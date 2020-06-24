@@ -39,81 +39,81 @@ import com.github.robtimus.obfuscation.annotation.StringRepresentationProvider.O
 import com.github.robtimus.obfuscation.annotation.StringRepresentationProvider.ShortArrayToString;
 import com.github.robtimus.obfuscation.annotation.StringRepresentationProvider.ToString;
 
-@SuppressWarnings({ "javadoc", "nls" })
-public class StringRepresentationProviderTest {
+@SuppressWarnings("nls")
+class StringRepresentationProviderTest {
 
     @Nested
     @DisplayName("createInstance(Class<? extends StringRepresentationProvider<?>>)")
-    public class CreateInstance {
+    class CreateInstance {
 
         @Test
         @DisplayName("ToString.class")
-        public void testWithToString() {
+        void testWithToString() {
             assertSame(ToString.INSTANCE, createInstance(ToString.class));
         }
 
         @Test
         @DisplayName("BooleanArrayToString.class")
-        public void testWithBooleanArrayToString() {
+        void testWithBooleanArrayToString() {
             assertSame(BooleanArrayToString.INSTANCE, createInstance(BooleanArrayToString.class));
         }
 
         @Test
         @DisplayName("CharArrayToString.class")
-        public void testWithCharArrayToString() {
+        void testWithCharArrayToString() {
             assertSame(CharArrayToString.INSTANCE, createInstance(CharArrayToString.class));
         }
 
         @Test
         @DisplayName("ByteArrayToString.class")
-        public void testWithByteArrayToString() {
+        void testWithByteArrayToString() {
             assertSame(ByteArrayToString.INSTANCE, createInstance(ByteArrayToString.class));
         }
 
         @Test
         @DisplayName("ShortArrayToString.class")
-        public void testShortArrayToString() {
+        void testShortArrayToString() {
             assertSame(ShortArrayToString.INSTANCE, createInstance(ShortArrayToString.class));
         }
 
         @Test
         @DisplayName("IntArrayToString.class")
-        public void testWithIntArrayToString() {
+        void testWithIntArrayToString() {
             assertSame(IntArrayToString.INSTANCE, createInstance(IntArrayToString.class));
         }
 
         @Test
         @DisplayName("LongArrayToString.class")
-        public void testWithLongArrayToString() {
+        void testWithLongArrayToString() {
             assertSame(LongArrayToString.INSTANCE, createInstance(LongArrayToString.class));
         }
 
         @Test
         @DisplayName("FloatArrayToString.class")
-        public void testWithFloatArrayToString() {
+        void testWithFloatArrayToString() {
             assertSame(FloatArrayToString.INSTANCE, createInstance(FloatArrayToString.class));
         }
 
         @Test
         @DisplayName("DoubleArrayToString.class")
-        public void testWithDoubleArrayToString() {
+        void testWithDoubleArrayToString() {
             assertSame(DoubleArrayToString.INSTANCE, createInstance(DoubleArrayToString.class));
         }
 
         @Test
         @DisplayName("ObjectArrayToString.class")
-        public void testWithObjectArrayToString() {
+        void testWithObjectArrayToString() {
             assertSame(ObjectArrayToString.INSTANCE, createInstance(ObjectArrayToString.class));
         }
 
         @Test
         @DisplayName("ObjectArrayDeepToString.class")
-        public void testWithObjectArrayDeepToString() {
+        void testWithObjectArrayDeepToString() {
             assertSame(ObjectArrayDeepToString.INSTANCE, createInstance(ObjectArrayDeepToString.class));
         }
 
         @Test
-        public void testWithValidImplemenation() {
+        void testWithValidImplemenation() {
             StringRepresentationProvider provider = createInstance(ValidImplementation.class);
             Object value = new Object();
             Supplier<? extends CharSequence> representation = provider.stringRepresentation(value);
@@ -121,7 +121,7 @@ public class StringRepresentationProviderTest {
         }
 
         @Test
-        public void testWithInvalidImplemenation() {
+        void testWithInvalidImplemenation() {
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> createInstance(InvalidImplementation.class));
             assertThat(exception.getCause(), instanceOf(ReflectiveOperationException.class));
         }
@@ -129,11 +129,11 @@ public class StringRepresentationProviderTest {
 
     @Nested
     @DisplayName("ToString")
-    public class ToStringTest {
+    class ToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentation() {
+        void testStringRepresentation() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = ToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -141,18 +141,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(ToString.class.getName().replace('$', '.'), ToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("BooleanArrayToString")
-    public class BooleanArrayToStringTest {
+    class BooleanArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(boolean[])")
-        public void testStringRepresentationForBooleanArray() {
+        void testStringRepresentationForBooleanArray() {
             boolean[] value = { true, false };
             Supplier<? extends CharSequence> representation = BooleanArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[true, false]", representation.get());
@@ -160,7 +160,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = BooleanArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -168,18 +168,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(BooleanArrayToString.class.getName().replace('$', '.'), BooleanArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("CharArrayToString")
-    public class CharArrayToStringTest {
+    class CharArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(char[])")
-        public void testStringRepresentationForCharArray() {
+        void testStringRepresentationForCharArray() {
             char[] value = "hello".toCharArray();
             Supplier<? extends CharSequence> representation = CharArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[h, e, l, l, o]", representation.get());
@@ -187,7 +187,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = CharArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -195,18 +195,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(CharArrayToString.class.getName().replace('$', '.'), CharArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("ByteArrayToString")
-    public class ByteArrayToStringTest {
+    class ByteArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(byte[])")
-        public void testStringRepresentationForByteArray() {
+        void testStringRepresentationForByteArray() {
             byte[] value = { 1, 2, 3 };
             Supplier<? extends CharSequence> representation = ByteArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[1, 2, 3]", representation.get());
@@ -214,7 +214,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = ByteArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -222,18 +222,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(ByteArrayToString.class.getName().replace('$', '.'), ByteArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("ShortArrayToString")
-    public class ShortArrayToStringTest {
+    class ShortArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(short[])")
-        public void testStringRepresentationForShortArray() {
+        void testStringRepresentationForShortArray() {
             short[] value = { 1, 2, 3 };
             Supplier<? extends CharSequence> representation = ShortArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[1, 2, 3]", representation.get());
@@ -241,7 +241,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = ShortArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -249,18 +249,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(ShortArrayToString.class.getName().replace('$', '.'), ShortArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("IntArrayToString")
-    public class IntArrayToStringTest {
+    class IntArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(int[])")
-        public void testStringRepresentationForIntArray() {
+        void testStringRepresentationForIntArray() {
             int[] value = { 1, 2, 3 };
             Supplier<? extends CharSequence> representation = IntArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[1, 2, 3]", representation.get());
@@ -268,7 +268,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = IntArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -276,18 +276,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(IntArrayToString.class.getName().replace('$', '.'), IntArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("LongArrayToString")
-    public class LongArrayToStringTest {
+    class LongArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(long[])")
-        public void testStringRepresentationForLongArray() {
+        void testStringRepresentationForLongArray() {
             long[] value = { 1, 2, 3 };
             Supplier<? extends CharSequence> representation = LongArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[1, 2, 3]", representation.get());
@@ -295,7 +295,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = LongArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -303,18 +303,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(LongArrayToString.class.getName().replace('$', '.'), LongArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("FloatArrayToString")
-    public class FloatArrayToStringTest {
+    class FloatArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(float[])")
-        public void testStringRepresentationForFloatArray() {
+        void testStringRepresentationForFloatArray() {
             float[] value = { 1, 2, 3, Float.NaN };
             Supplier<? extends CharSequence> representation = FloatArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[1.0, 2.0, 3.0, NaN]", representation.get());
@@ -322,7 +322,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = FloatArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -330,18 +330,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(FloatArrayToString.class.getName().replace('$', '.'), FloatArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("DoubleArrayToString")
-    public class DoubleArrayToStringTest {
+    class DoubleArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(double[])")
-        public void testStringRepresentationForDoubleArray() {
+        void testStringRepresentationForDoubleArray() {
             double[] value = { 1, 2, 3, Double.NaN };
             Supplier<? extends CharSequence> representation = DoubleArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[1.0, 2.0, 3.0, NaN]", representation.get());
@@ -349,7 +349,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = DoubleArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -357,18 +357,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(DoubleArrayToString.class.getName().replace('$', '.'), DoubleArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("ObjectArrayToString")
-    public class ObjectArrayToStringTest {
+    class ObjectArrayToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(Object[])")
-        public void testStringRepresentationForObjectArray() {
+        void testStringRepresentationForObjectArray() {
             Object[] value = { true, 1, "foo" };
             Supplier<? extends CharSequence> representation = ObjectArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals("[true, 1, foo]", representation.get());
@@ -376,7 +376,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = ObjectArrayToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -384,18 +384,18 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(ObjectArrayToString.class.getName().replace('$', '.'), ObjectArrayToString.INSTANCE.toString());
         }
     }
 
     @Nested
     @DisplayName("ObjectArrayDeepToString")
-    public class ObjectArrayDeepToStringTest {
+    class ObjectArrayDeepToStringTest {
 
         @Test
         @DisplayName("stringRepresentation(Object[])")
-        public void testStringRepresentationForObjectArray() {
+        void testStringRepresentationForObjectArray() {
             Object[] value = { true, 1, "foo", new byte[] { 1, 2, 3 } };
             Supplier<? extends CharSequence> representation = ObjectArrayDeepToString.INSTANCE.stringRepresentation(value);
             assertEquals("[true, 1, foo, [1, 2, 3]]", representation.get());
@@ -403,7 +403,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("stringRepresentation(Object)")
-        public void testStringRepresentationForOther() {
+        void testStringRepresentationForOther() {
             Object value = new Object();
             Supplier<? extends CharSequence> representation = ObjectArrayDeepToString.INSTANCE.stringRepresentation(value);
             assertEquals(value.toString(), representation.get());
@@ -411,7 +411,7 @@ public class StringRepresentationProviderTest {
 
         @Test
         @DisplayName("toString()")
-        public void testToString() {
+        void testToString() {
             assertEquals(ObjectArrayDeepToString.class.getName().replace('$', '.'), ObjectArrayDeepToString.INSTANCE.toString());
         }
     }

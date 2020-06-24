@@ -36,16 +36,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import com.github.robtimus.obfuscation.Obfuscator;
 
-@SuppressWarnings({ "javadoc", "nls" })
-public class ObfuscatorFactoryTest {
+@SuppressWarnings("nls")
+class ObfuscatorFactoryTest {
 
     @Nested
     @DisplayName("createObfuscator(Annotation...), createObfuscator(AnnotatedElement)")
-    public class CreateObfuscatorFromAnnotationsTest {
+    class CreateObfuscatorFromAnnotationsTest {
 
         @Test
         @DisplayName("@ObfuscateAll")
-        public void testObfuscateAll() {
+        void testObfuscateAll() {
             Field field = getField("obfuscateAll");
             Annotation[] annotations = field.getAnnotations();
             Obfuscator obfuscator = all('x');
@@ -56,7 +56,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("@ObfuscateNone")
-        public void testObfuscateNone() {
+        void testObfuscateNone() {
             Field field = getField("obfuscateNone");
             Annotation[] annotations = field.getAnnotations();
             Obfuscator obfuscator = none();
@@ -67,7 +67,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("@ObfuscateFixedLength")
-        public void testObfuscateFixedLength() {
+        void testObfuscateFixedLength() {
             Field field = getField("obfuscateFixedLength");
             Annotation[] annotations = field.getAnnotations();
             Obfuscator obfuscator = fixedLength(3, 'x');
@@ -78,7 +78,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("@ObfuscateFixedValue")
-        public void testObfuscateFixedValue() {
+        void testObfuscateFixedValue() {
             Field field = getField("obfuscateFixedValue");
             Annotation[] annotations = field.getAnnotations();
             Obfuscator obfuscator = fixedValue("fixed");
@@ -89,7 +89,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("@ObfuscatePortion")
-        public void testObfuscatePortion() {
+        void testObfuscatePortion() {
             Field field = getField("obfuscatePortion");
             Annotation[] annotations = field.getAnnotations();
             Obfuscator obfuscator = portion()
@@ -107,7 +107,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("@ObfuscateUsing")
-        public void testObfuscateUsing() {
+        void testObfuscateUsing() {
             Field field = getField("obfuscateUsing");
             Annotation[] annotations = field.getAnnotations();
             Obfuscator obfuscator = fixedLength(8);
@@ -118,7 +118,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("multiple annotations")
-        public void testMultipleAnnotations() {
+        void testMultipleAnnotations() {
             Field field = getField("multipleAnnotations");
             Annotation[] annotations = field.getAnnotations();
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> createObfuscator(annotations));
@@ -127,7 +127,7 @@ public class ObfuscatorFactoryTest {
 
         @Test
         @DisplayName("no annotations")
-        public void testNoAnnotations() {
+        void testNoAnnotations() {
             Field field = getField("noAnnotations");
             Annotation[] annotations = field.getAnnotations();
             assertAll(

@@ -27,21 +27,20 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import com.github.robtimus.obfuscation.Obfuscator;
 
-@SuppressWarnings("javadoc")
-public class ObfuscatorProviderTest {
+class ObfuscatorProviderTest {
 
     @Nested
     @DisplayName("createInstance(Class<? extends StringRepresentationProvider<?>>)")
-    public class CreateInstance {
+    class CreateInstance {
 
         @Test
-        public void testWithValidImplemenation() {
+        void testWithValidImplemenation() {
             ObfuscatorProvider provider = createInstance(ValidImplementation.class);
             assertEquals(Obfuscator.fixedLength(3), provider.obfuscator());
         }
 
         @Test
-        public void testWithInvalidImplemenation() {
+        void testWithInvalidImplemenation() {
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> createInstance(InvalidImplementation.class));
             assertThat(exception.getCause(), instanceOf(ReflectiveOperationException.class));
         }

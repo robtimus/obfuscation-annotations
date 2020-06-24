@@ -41,7 +41,7 @@ import com.github.robtimus.obfuscation.Obfuscator;
 public final class ObfuscatorFactory {
 
     private ObfuscatorFactory() {
-        throw new Error("cannot create instances of " + getClass().getName()); //$NON-NLS-1$
+        throw new IllegalStateException("cannot create instances of " + getClass().getName()); //$NON-NLS-1$
     }
 
     /**
