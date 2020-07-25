@@ -97,6 +97,25 @@ class ObfuscatorFactoryTest {
                     .keepAtEnd(2)
                     .atLeastFromStart(3)
                     .atLeastFromEnd(4)
+                    .withFixedTotalLength(8)
+                    .withMaskChar('x')
+                    .build();
+            assertAll(
+                    () -> assertEquals(Optional.of(obfuscator), createObfuscator(annotations)),
+                    () -> assertEquals(Optional.of(obfuscator), createObfuscator(field)));
+        }
+
+        @Test
+        @DisplayName("@ObfuscatePortion with fixedLength")
+        @SuppressWarnings("deprecation")
+        void testObfuscatePortionWithFixedLength() {
+            Field field = getField("obfuscatePortionWithFixedLength");
+            Annotation[] annotations = field.getAnnotations();
+            Obfuscator obfuscator = portion()
+                    .keepAtStart(1)
+                    .keepAtEnd(2)
+                    .atLeastFromStart(3)
+                    .atLeastFromEnd(4)
                     .withFixedLength(5)
                     .withMaskChar('x')
                     .build();
@@ -155,8 +174,11 @@ class ObfuscatorFactoryTest {
         @ObfuscateFixedValue("fixed")
         private String obfuscateFixedValue;
 
-        @ObfuscatePortion(keepAtStart = 1, keepAtEnd = 2, atLeastFromStart = 3, atLeastFromEnd = 4, fixedLength = 5, maskChar = 'x')
+        @ObfuscatePortion(keepAtStart = 1, keepAtEnd = 2, atLeastFromStart = 3, atLeastFromEnd = 4, fixedTotalLength = 8, maskChar = 'x')
         private String obfuscatePortion;
+
+        @ObfuscatePortion(keepAtStart = 1, keepAtEnd = 2, atLeastFromStart = 3, atLeastFromEnd = 4, fixedLength = 5, maskChar = 'x')
+        private String obfuscatePortionWithFixedLength;
 
         @ObfuscateUsing(Provider.class)
         private String obfuscateUsing;

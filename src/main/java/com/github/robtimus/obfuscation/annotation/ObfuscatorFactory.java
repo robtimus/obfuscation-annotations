@@ -96,12 +96,14 @@ public final class ObfuscatorFactory {
      * @return An {@link Obfuscator} based on the given annotation.
      * @throws NullPointerException If the given annotation is null.
      */
+    @SuppressWarnings("deprecation")
     public static Obfuscator createObfuscator(ObfuscatePortion annotation) {
         return portion()
                 .keepAtStart(annotation.keepAtStart())
                 .keepAtEnd(annotation.keepAtEnd())
                 .atLeastFromStart(annotation.atLeastFromStart())
                 .atLeastFromEnd(annotation.atLeastFromEnd())
+                .withFixedTotalLength(annotation.fixedTotalLength())
                 .withFixedLength(annotation.fixedLength())
                 .withMaskChar(annotation.maskChar())
                 .build();

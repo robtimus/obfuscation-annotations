@@ -57,8 +57,26 @@ public @interface ObfuscatePortion {
     int atLeastFromEnd() default 0;
 
     /**
-     * The fixed number of {@link #maskChar() mask characters}, or a negative value to use the actual length.
+     * The fixed total length to use for obfuscated contents, or a negative value to use the actual length.
+     * When obfuscating, the result will have {@link #maskChar() mask characters} added until this total length has been reached.
+     * <p>
+     * Note: when used in combination with {@link #keepAtStart()} and/or {@link #keepAtEnd()}, this total length must be at least the sum of both
+     * other values. When used in combination with both, parts of the input may be repeated in the obfuscated content if the input's length is less
+     * than the combined number of characters to keep.
+     *
+     * @since 1.1
      */
+    int fixedTotalLength() default -1;
+
+    /**
+     * The fixed number of {@link #maskChar() mask characters}, or a negative value to use the actual length.
+     * <p>
+     * This setting will be ignored if the {@link #fixedTotalLength() fixed total length} is set.
+     *
+     * @deprecated The total length of obfuscated contents can very when using this setting, making it possible in certain cases to find the original
+     *             value that was obfuscated. Use {@link #fixedTotalLength()} instead.
+     */
+    @Deprecated
     int fixedLength() default -1;
 
     /**
