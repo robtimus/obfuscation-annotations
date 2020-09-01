@@ -20,6 +20,7 @@ package com.github.robtimus.obfuscation.annotation;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import com.github.robtimus.obfuscation.Obfuscator;
 
@@ -38,6 +39,18 @@ public interface StringRepresentationProvider {
      * @throws NullPointerException If the given value is {@code null}.
      */
     Supplier<? extends CharSequence> stringRepresentation(Object value);
+
+    /**
+     * Returns function that acts as the string representation for values.
+     * <p>
+     * This default implementation delegates to {@link #stringRepresentation(Object)}, then calls {@link Supplier#get()} on it.
+     *
+     * @return A function that acts as the string representation for values.
+     * @since 1.2
+     */
+    default Function<Object, ? extends CharSequence> stringRepresentation() {
+        return t -> stringRepresentation(t).get();
+    }
 
     /**
      * Creates an instance of a string representation provider type.
@@ -111,6 +124,11 @@ public interface StringRepresentationProvider {
         }
 
         @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return Object::toString;
+        }
+
+        @Override
         @SuppressWarnings("nls")
         public String toString() {
             return StringRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
@@ -134,6 +152,13 @@ public interface StringRepresentationProvider {
         @Override
         protected Supplier<? extends CharSequence> typeSpecificStringRepresentation(boolean[] value) {
             return () -> Arrays.toString(value);
+        }
+
+        @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof boolean[]
+                    ? Arrays.toString((boolean[]) t)
+                    : t.toString();
         }
 
         @Override
@@ -163,6 +188,13 @@ public interface StringRepresentationProvider {
         }
 
         @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof char[]
+                    ? Arrays.toString((char[]) t)
+                    : t.toString();
+        }
+
+        @Override
         @SuppressWarnings("nls")
         public String toString() {
             return StringRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
@@ -186,6 +218,13 @@ public interface StringRepresentationProvider {
         @Override
         protected Supplier<? extends CharSequence> typeSpecificStringRepresentation(byte[] value) {
             return () -> Arrays.toString(value);
+        }
+
+        @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof byte[]
+                    ? Arrays.toString((byte[]) t)
+                    : t.toString();
         }
 
         @Override
@@ -215,6 +254,13 @@ public interface StringRepresentationProvider {
         }
 
         @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof short[]
+                    ? Arrays.toString((short[]) t)
+                    : t.toString();
+        }
+
+        @Override
         @SuppressWarnings("nls")
         public String toString() {
             return StringRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
@@ -238,6 +284,13 @@ public interface StringRepresentationProvider {
         @Override
         protected Supplier<? extends CharSequence> typeSpecificStringRepresentation(int[] value) {
             return () -> Arrays.toString(value);
+        }
+
+        @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof int[]
+                    ? Arrays.toString((int[]) t)
+                    : t.toString();
         }
 
         @Override
@@ -267,6 +320,13 @@ public interface StringRepresentationProvider {
         }
 
         @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof long[]
+                    ? Arrays.toString((long[]) t)
+                    : t.toString();
+        }
+
+        @Override
         @SuppressWarnings("nls")
         public String toString() {
             return StringRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
@@ -290,6 +350,13 @@ public interface StringRepresentationProvider {
         @Override
         protected Supplier<? extends CharSequence> typeSpecificStringRepresentation(float[] value) {
             return () -> Arrays.toString(value);
+        }
+
+        @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof float[]
+                    ? Arrays.toString((float[]) t)
+                    : t.toString();
         }
 
         @Override
@@ -319,6 +386,13 @@ public interface StringRepresentationProvider {
         }
 
         @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof double[]
+                    ? Arrays.toString((double[]) t)
+                    : t.toString();
+        }
+
+        @Override
         @SuppressWarnings("nls")
         public String toString() {
             return StringRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
@@ -345,6 +419,13 @@ public interface StringRepresentationProvider {
         }
 
         @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof Object[]
+                    ? Arrays.toString((Object[]) t)
+                    : t.toString();
+        }
+
+        @Override
         @SuppressWarnings("nls")
         public String toString() {
             return StringRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
@@ -368,6 +449,13 @@ public interface StringRepresentationProvider {
         @Override
         protected Supplier<? extends CharSequence> typeSpecificStringRepresentation(Object[] value) {
             return () -> Arrays.deepToString(value);
+        }
+
+        @Override
+        public Function<Object, ? extends CharSequence> stringRepresentation() {
+            return t -> t instanceof Object[]
+                    ? Arrays.deepToString((Object[]) t)
+                    : t.toString();
         }
 
         @Override
