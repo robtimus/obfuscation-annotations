@@ -30,7 +30,7 @@ import com.github.robtimus.obfuscation.Obfuscator;
 class ObfuscatorProviderTest {
 
     @Nested
-    @DisplayName("createInstance(Class<? extends StringRepresentationProvider<?>>)")
+    @DisplayName("createInstance(Class<? extends ObfuscatorProvider>)")
     class CreateInstance {
 
         @Test

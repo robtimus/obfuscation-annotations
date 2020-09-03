@@ -22,11 +22,19 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import com.github.robtimus.obfuscation.Obfuscator;
 
 /**
- * Indicates that objects should get a custom string representation when being obfuscated using {@link Obfuscator#obfuscateObject(Object, Supplier)}.
+ * Indicates that objects should get a custom character representation when being obfuscated using
+ * {@link Obfuscator#obfuscateObject(Object, Supplier)}, {@link Obfuscator#obfuscateCollection(Collection, Function)},
+ * {@link Obfuscator#obfuscateList(List, Function)}, {@link Obfuscator#obfuscateSet(Set, Function)} or {@link Obfuscator#obfuscateMap(Map, Function)}.
+ * {@link Obfuscator#obfuscateObject(Object, Supplier)}.
  *
  * @author Rob Spoor
  */
@@ -36,7 +44,7 @@ import com.github.robtimus.obfuscation.Obfuscator;
 public @interface RepresentedBy {
 
     /**
-     * The string representation provider type.
+     * The character representation provider type.
      */
-    Class<? extends StringRepresentationProvider> value();
+    Class<? extends CharacterRepresentationProvider> value();
 }
