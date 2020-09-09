@@ -17,7 +17,6 @@
 
 package com.github.robtimus.obfuscation.annotation;
 
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -47,57 +46,6 @@ public interface CharacterRepresentationProvider {
      * @since 2.0
      */
     CharSequence toCharSequence(Object value);
-
-    /**
-     * Creates an instance of a character representation provider type.
-     *
-     * @param providerClass The character representation provider type.
-     * @return The created instance.
-     * @throws IllegalStateException If the given provider type does not have a public, no-argument constructor,
-     *                                   and is not one of the nested classes of this interface.
-     */
-    static CharacterRepresentationProvider createInstance(Class<? extends CharacterRepresentationProvider> providerClass) {
-        if (providerClass == ToString.class) {
-            return ToString.INSTANCE;
-        }
-        if (providerClass == BooleanArrayToString.class) {
-            return BooleanArrayToString.INSTANCE;
-        }
-        if (providerClass == CharArrayToString.class) {
-            return CharArrayToString.INSTANCE;
-        }
-        if (providerClass == ByteArrayToString.class) {
-            return ByteArrayToString.INSTANCE;
-        }
-        if (providerClass == ShortArrayToString.class) {
-            return ShortArrayToString.INSTANCE;
-        }
-        if (providerClass == IntArrayToString.class) {
-            return IntArrayToString.INSTANCE;
-        }
-        if (providerClass == LongArrayToString.class) {
-            return LongArrayToString.INSTANCE;
-        }
-        if (providerClass == FloatArrayToString.class) {
-            return FloatArrayToString.INSTANCE;
-        }
-        if (providerClass == DoubleArrayToString.class) {
-            return DoubleArrayToString.INSTANCE;
-        }
-        if (providerClass == ObjectArrayToString.class) {
-            return ObjectArrayToString.INSTANCE;
-        }
-        if (providerClass == ObjectArrayDeepToString.class) {
-            return ObjectArrayDeepToString.INSTANCE;
-        }
-
-        try {
-            Constructor<? extends CharacterRepresentationProvider> constructor = providerClass.getConstructor();
-            return constructor.newInstance();
-        } catch (ReflectiveOperationException e) {
-            throw new IllegalStateException(e);
-        }
-    }
 
     /**
      * A character representation provider that uses {@link Object#toString()}.

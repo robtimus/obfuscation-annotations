@@ -17,7 +17,6 @@
 
 package com.github.robtimus.obfuscation.annotation;
 
-import java.lang.reflect.Constructor;
 import com.github.robtimus.obfuscation.Obfuscator;
 
 /**
@@ -34,20 +33,4 @@ public interface ObfuscatorProvider {
      * @return The provided {@link Obfuscator}.
      */
     Obfuscator obfuscator();
-
-    /**
-     * Creates an instance of an {@link Obfuscator} provider type.
-     *
-     * @param providerClass The {@link Obfuscator} provider type.
-     * @return The created instance.
-     * @throws IllegalStateException If the given provider type does not have a public, no-argument constructor.
-     */
-    static ObfuscatorProvider createInstance(Class<? extends ObfuscatorProvider> providerClass) {
-        try {
-            Constructor<? extends ObfuscatorProvider> constructor = providerClass.getConstructor();
-            return constructor.newInstance();
-        } catch (ReflectiveOperationException e) {
-            throw new IllegalStateException(e);
-        }
-    }
 }

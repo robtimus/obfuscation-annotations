@@ -17,12 +17,7 @@
 
 package com.github.robtimus.obfuscation.annotation;
 
-import static com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.createInstance;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -40,91 +35,6 @@ import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvide
 
 @SuppressWarnings("nls")
 class CharacterRepresentationProviderTest {
-
-    @Nested
-    @DisplayName("createInstance(Class<? extends StringRepresentationProvider<?>>)")
-    class CreateInstance {
-
-        @Test
-        @DisplayName("ToString.class")
-        void testWithToString() {
-            assertSame(ToString.INSTANCE, createInstance(ToString.class));
-        }
-
-        @Test
-        @DisplayName("BooleanArrayToString.class")
-        void testWithBooleanArrayToString() {
-            assertSame(BooleanArrayToString.INSTANCE, createInstance(BooleanArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("CharArrayToString.class")
-        void testWithCharArrayToString() {
-            assertSame(CharArrayToString.INSTANCE, createInstance(CharArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("ByteArrayToString.class")
-        void testWithByteArrayToString() {
-            assertSame(ByteArrayToString.INSTANCE, createInstance(ByteArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("ShortArrayToString.class")
-        void testShortArrayToString() {
-            assertSame(ShortArrayToString.INSTANCE, createInstance(ShortArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("IntArrayToString.class")
-        void testWithIntArrayToString() {
-            assertSame(IntArrayToString.INSTANCE, createInstance(IntArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("LongArrayToString.class")
-        void testWithLongArrayToString() {
-            assertSame(LongArrayToString.INSTANCE, createInstance(LongArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("FloatArrayToString.class")
-        void testWithFloatArrayToString() {
-            assertSame(FloatArrayToString.INSTANCE, createInstance(FloatArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("DoubleArrayToString.class")
-        void testWithDoubleArrayToString() {
-            assertSame(DoubleArrayToString.INSTANCE, createInstance(DoubleArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("ObjectArrayToString.class")
-        void testWithObjectArrayToString() {
-            assertSame(ObjectArrayToString.INSTANCE, createInstance(ObjectArrayToString.class));
-        }
-
-        @Test
-        @DisplayName("ObjectArrayDeepToString.class")
-        void testWithObjectArrayDeepToString() {
-            assertSame(ObjectArrayDeepToString.INSTANCE, createInstance(ObjectArrayDeepToString.class));
-        }
-
-        @Test
-        void testWithValidImplemenation() {
-            CharacterRepresentationProvider provider = createInstance(ValidImplementation.class);
-            Object value = new Object();
-            CharSequence representation = provider.toCharSequence(value);
-            assertEquals(value.toString(), representation);
-        }
-
-        @Test
-        void testWithInvalidImplemenation() {
-            IllegalStateException exception = assertThrows(IllegalStateException.class, () -> createInstance(InvalidImplementation.class));
-            assertThat(exception.getCause(), instanceOf(ReflectiveOperationException.class));
-        }
-    }
 
     @Nested
     @DisplayName("ToString")
@@ -462,22 +372,6 @@ class CharacterRepresentationProviderTest {
         @DisplayName("toString()")
         void testToString() {
             assertEquals(ObjectArrayDeepToString.class.getName().replace('$', '.'), ObjectArrayDeepToString.INSTANCE.toString());
-        }
-    }
-
-    public static final class ValidImplementation implements CharacterRepresentationProvider {
-
-        @Override
-        public CharSequence toCharSequence(Object value) {
-            return value.toString();
-        }
-    }
-
-    private static final class InvalidImplementation implements CharacterRepresentationProvider {
-
-        @Override
-        public CharSequence toCharSequence(Object value) {
-            throw new UnsupportedOperationException();
         }
     }
 }
