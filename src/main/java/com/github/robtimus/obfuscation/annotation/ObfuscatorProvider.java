@@ -25,6 +25,7 @@ import com.github.robtimus.obfuscation.Obfuscator;
  *
  * @author Rob Spoor
  */
+@FunctionalInterface
 public interface ObfuscatorProvider {
 
     /**
