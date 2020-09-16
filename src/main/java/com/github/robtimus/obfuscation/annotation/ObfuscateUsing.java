@@ -30,7 +30,7 @@ import com.github.robtimus.obfuscation.Obfuscator;
  * @author Rob Spoor
  */
 @Documented
-@Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER })
+@Target({ ElementType.ANNOTATION_TYPE, ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ObfuscateUsing {
 
