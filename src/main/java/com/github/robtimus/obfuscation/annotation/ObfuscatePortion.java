@@ -69,17 +69,6 @@ public @interface ObfuscatePortion {
     int fixedTotalLength() default -1;
 
     /**
-     * The fixed number of {@link #maskChar() mask characters}, or a negative value to use the actual length.
-     * <p>
-     * This setting will be ignored if the {@link #fixedTotalLength() fixed total length} is set.
-     *
-     * @deprecated The total length of obfuscated contents can very when using this setting, making it possible in certain cases to find the original
-     *             value that was obfuscated. Use {@link #fixedTotalLength()} instead.
-     */
-    @Deprecated
-    int fixedLength() default -1;
-
-    /**
      * The character to replace with.
      */
     char maskChar() default '*';

@@ -122,7 +122,6 @@ public interface ObjectFactory {
      * @return An {@link Obfuscator} based on the given annotation.
      * @throws NullPointerException If the given annotation is null.
      */
-    @SuppressWarnings("deprecation")
     default Obfuscator obfuscator(ObfuscatePortion annotation) {
         return portion()
                 .keepAtStart(annotation.keepAtStart())
@@ -130,7 +129,6 @@ public interface ObjectFactory {
                 .atLeastFromStart(annotation.atLeastFromStart())
                 .atLeastFromEnd(annotation.atLeastFromEnd())
                 .withFixedTotalLength(annotation.fixedTotalLength())
-                .withFixedLength(annotation.fixedLength())
                 .withMaskChar(annotation.maskChar())
                 .build();
     }
