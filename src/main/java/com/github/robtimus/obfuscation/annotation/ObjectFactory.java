@@ -40,6 +40,7 @@ import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvide
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.CharArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.DoubleArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.FloatArrayToString;
+import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.Identity;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.IntArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.LongArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.ObjectArrayDeepToString;
@@ -393,6 +394,9 @@ public interface ObjectFactory {
     default CharacterRepresentationProvider characterRepresentationProvider(Class<? extends CharacterRepresentationProvider> providerClass) {
         if (providerClass == ToString.class) {
             return ToString.INSTANCE;
+        }
+        if (providerClass == Identity.class) {
+            return Identity.INSTANCE;
         }
         if (providerClass == BooleanArrayToString.class) {
             return BooleanArrayToString.INSTANCE;

@@ -32,6 +32,7 @@ import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvide
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.CharArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.DoubleArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.FloatArrayToString;
+import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.Identity;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.IntArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.LongArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.ObjectArrayDeepToString;
@@ -61,6 +62,9 @@ class CharacterRepresentationProviderTest {
                 arguments(double[].class, DoubleArrayToString.INSTANCE),
                 arguments(Object[].class, ObjectArrayToString.INSTANCE),
                 arguments(String[].class, ObjectArrayToString.INSTANCE),
+                arguments(CharSequence.class, Identity.INSTANCE),
+                arguments(String.class, Identity.INSTANCE),
+                arguments(StringBuilder.class, Identity.INSTANCE),
                 arguments(boolean.class, ToString.INSTANCE),
                 arguments(Boolean.class, ToString.INSTANCE),
                 arguments(char.class, ToString.INSTANCE),
@@ -79,7 +83,6 @@ class CharacterRepresentationProviderTest {
                 arguments(Double.class, ToString.INSTANCE),
                 arguments(void.class, ToString.INSTANCE),
                 arguments(Void.class, ToString.INSTANCE),
-                arguments(String.class, ToString.INSTANCE),
         };
     }
 
@@ -99,6 +102,38 @@ class CharacterRepresentationProviderTest {
         @DisplayName("toString()")
         void testToString() {
             assertEquals(ToString.class.getName().replace('$', '.'), ToString.INSTANCE.toString());
+        }
+    }
+
+    @Nested
+    @DisplayName("Identity")
+    class IdentityTest {
+
+        @Nested
+        @DisplayName("toCharSequence(Object)")
+        class ToCharSequence {
+
+            @Test
+            @DisplayName("with CharSequence input")
+            void testWithBooleanArrayInput() {
+                CharSequence value = new StringBuilder("foo");
+                CharSequence representation = Identity.INSTANCE.toCharSequence(value);
+                assertSame(value, representation);
+            }
+
+            @Test
+            @DisplayName("with non-CharSequence input")
+            void testWithNonBooleanArrayInput() {
+                Object value = new Object();
+                CharSequence representation = Identity.INSTANCE.toCharSequence(value);
+                assertEquals(value.toString(), representation);
+            }
+        }
+
+        @Test
+        @DisplayName("toString()")
+        void testToString() {
+            assertEquals(Identity.class.getName().replace('$', '.'), Identity.INSTANCE.toString());
         }
     }
 

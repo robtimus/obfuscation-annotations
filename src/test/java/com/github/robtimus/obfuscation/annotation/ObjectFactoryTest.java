@@ -45,6 +45,7 @@ import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvide
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.CharArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.DoubleArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.FloatArrayToString;
+import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.Identity;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.IntArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.LongArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.ObjectArrayDeepToString;
@@ -265,6 +266,12 @@ class ObjectFactoryTest {
         @DisplayName("ToString.class")
         void testWithToString() {
             assertSame(ToString.INSTANCE, factory.characterRepresentationProvider(ToString.class));
+        }
+
+        @Test
+        @DisplayName("Identity.class")
+        void testWithIdentity() {
+            assertSame(Identity.INSTANCE, factory.characterRepresentationProvider(Identity.class));
         }
 
         @Test

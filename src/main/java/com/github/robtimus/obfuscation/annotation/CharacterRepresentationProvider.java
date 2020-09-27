@@ -33,6 +33,7 @@ import com.github.robtimus.obfuscation.Obfuscator;
  * {@link Obfuscator#obfuscateList(List, Function)}, {@link Obfuscator#obfuscateSet(Set, Function)} or {@link Obfuscator#obfuscateMap(Map, Function)}.
  *
  * @author Rob Spoor
+ * @since 2.0
  */
 @FunctionalInterface
 public interface CharacterRepresentationProvider {
@@ -43,7 +44,6 @@ public interface CharacterRepresentationProvider {
      * @param value The value to return the character representation for.
      * @return A {@code CharSequence} containing the value's character representation.
      * @throws NullPointerException If the given value is {@code null}.
-     * @since 2.0
      */
     CharSequence toCharSequence(Object value);
 
@@ -60,13 +60,13 @@ public interface CharacterRepresentationProvider {
      * <li>{@link FloatArrayToString#INSTANCE} for {@code float[]}</li>
      * <li>{@link DoubleArrayToString#INSTANCE} for {@code double[]}</li>
      * <li>{@link ObjectArrayToString#INSTANCE} for {@code Object[]} and sub types</li>
+     * <li>{@code Identity#INSTANCE} for {@link CharSequence} and sub types</li>
      * <li>{@link ToString#INSTANCE} for all other cases</li>
      * </ul>
      *
      * @param type The type for which to return a default {@code CharacterRepresentationProvider} instance.
      * @return A default {@code CharacterRepresentationProvider} instance for the given type.
      * @throws NullPointerException If the given type is {@code null}.
-     * @since 2.0
      */
     static CharacterRepresentationProvider getDefaultInstance(Class<?> type) {
         Objects.requireNonNull(type);
@@ -97,6 +97,9 @@ public interface CharacterRepresentationProvider {
         if (Object[].class.isAssignableFrom(type)) {
             return ObjectArrayToString.INSTANCE;
         }
+        if (CharSequence.class.isAssignableFrom(type)) {
+            return Identity.INSTANCE;
+        }
         return ToString.INSTANCE;
     }
 
@@ -104,6 +107,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Object#toString()}.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class ToString implements CharacterRepresentationProvider {
 
@@ -127,9 +131,37 @@ public interface CharacterRepresentationProvider {
     }
 
     /**
+     * A character representation provider that returns {@link CharSequence CharSequences} unmodified, or {@link Object#toString()} for other types.
+     *
+     * @author Rob Spoor
+     * @since 2.0
+     */
+    final class Identity extends TypeSpecific<CharSequence> {
+
+        /** The single instance. */
+        public static final Identity INSTANCE = new Identity();
+
+        private Identity() {
+            super(CharSequence.class);
+        }
+
+        @Override
+        protected CharSequence convert(CharSequence value) {
+            return value;
+        }
+
+        @Override
+        @SuppressWarnings("nls")
+        public String toString() {
+            return CharacterRepresentationProvider.class.getName() + "." + getClass().getSimpleName();
+        }
+    }
+
+    /**
      * A character representation provider that uses {@link Arrays#toString(boolean[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class BooleanArrayToString extends TypeSpecific<boolean[]> {
 
@@ -156,6 +188,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(char[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class CharArrayToString extends TypeSpecific<char[]> {
 
@@ -182,6 +215,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(byte[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class ByteArrayToString extends TypeSpecific<byte[]> {
 
@@ -208,6 +242,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(short[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class ShortArrayToString extends TypeSpecific<short[]> {
 
@@ -234,6 +269,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(int[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class IntArrayToString extends TypeSpecific<int[]> {
 
@@ -260,6 +296,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(long[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class LongArrayToString extends TypeSpecific<long[]> {
 
@@ -286,6 +323,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(float[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class FloatArrayToString extends TypeSpecific<float[]> {
 
@@ -312,6 +350,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(double[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class DoubleArrayToString extends TypeSpecific<double[]> {
 
@@ -338,6 +377,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#toString(Object[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class ObjectArrayToString extends TypeSpecific<Object[]> {
 
@@ -364,6 +404,7 @@ public interface CharacterRepresentationProvider {
      * A character representation provider that uses {@link Arrays#deepToString(Object[])}, or {@link Object#toString()} for other types.
      *
      * @author Rob Spoor
+     * @since 2.0
      */
     final class ObjectArrayDeepToString extends TypeSpecific<Object[]> {
 
@@ -392,6 +433,7 @@ public interface CharacterRepresentationProvider {
      *
      * @author Rob Spoor
      * @param <T> The type for which to return a specific character representation.
+     * @since 2.0
      */
     abstract class TypeSpecific<T> implements CharacterRepresentationProvider {
 
