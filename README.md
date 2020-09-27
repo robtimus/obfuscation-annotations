@@ -13,7 +13,7 @@ Contains general purpose annotations for [obfuscation-core](https://robtimus.git
 * [ObfuscatePortion](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatePortion.html) represents [Obfuscator.portion](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html#portion--).
 * [ObfuscateUsing](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscateUsing.html) allows you to provide custom [Obfuscator](https://robtimus.github.io/obfuscation-core/apidocs/com/github/robtimus/obfuscation/Obfuscator.html) implementations. This is done through implementations of [ObfuscatorProvider](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorProvider.html).
 
-To help with converting these annotations to `Obfuscator` instances you can use [ObfuscatorFactory](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObfuscatorFactory.html)
+To help with converting these annotations to `Obfuscator` instances you can use [ObjectFactory](https://robtimus.github.io/obfuscation-annotations/apidocs/com/github/robtimus/obfuscation/annotation/ObjectFactory.html)
 
 ### Annotations for obfuscating objects
 
