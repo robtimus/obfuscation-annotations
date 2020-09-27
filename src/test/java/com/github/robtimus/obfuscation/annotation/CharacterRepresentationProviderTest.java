@@ -17,10 +17,16 @@
 
 package com.github.robtimus.obfuscation.annotation;
 
+import static com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.getDefaultInstance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.BooleanArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.ByteArrayToString;
 import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvider.CharArrayToString;
@@ -35,6 +41,47 @@ import com.github.robtimus.obfuscation.annotation.CharacterRepresentationProvide
 
 @SuppressWarnings("nls")
 class CharacterRepresentationProviderTest {
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource
+    @DisplayName("getDefaultInstance(Class<?>)")
+    void testGetDefaultInstance(Class<?> type, CharacterRepresentationProvider expected) {
+        assertSame(expected, getDefaultInstance(type));
+    }
+
+    static Arguments[] testGetDefaultInstance() {
+        return new Arguments[] {
+                arguments(boolean[].class, BooleanArrayToString.INSTANCE),
+                arguments(char[].class, CharArrayToString.INSTANCE),
+                arguments(byte[].class, ByteArrayToString.INSTANCE),
+                arguments(short[].class, ShortArrayToString.INSTANCE),
+                arguments(int[].class, IntArrayToString.INSTANCE),
+                arguments(long[].class, LongArrayToString.INSTANCE),
+                arguments(float[].class, FloatArrayToString.INSTANCE),
+                arguments(double[].class, DoubleArrayToString.INSTANCE),
+                arguments(Object[].class, ObjectArrayToString.INSTANCE),
+                arguments(String[].class, ObjectArrayToString.INSTANCE),
+                arguments(boolean.class, ToString.INSTANCE),
+                arguments(Boolean.class, ToString.INSTANCE),
+                arguments(char.class, ToString.INSTANCE),
+                arguments(Character.class, ToString.INSTANCE),
+                arguments(byte.class, ToString.INSTANCE),
+                arguments(Byte.class, ToString.INSTANCE),
+                arguments(short.class, ToString.INSTANCE),
+                arguments(Short.class, ToString.INSTANCE),
+                arguments(int.class, ToString.INSTANCE),
+                arguments(Integer.class, ToString.INSTANCE),
+                arguments(long.class, ToString.INSTANCE),
+                arguments(Long.class, ToString.INSTANCE),
+                arguments(float.class, ToString.INSTANCE),
+                arguments(Float.class, ToString.INSTANCE),
+                arguments(double.class, ToString.INSTANCE),
+                arguments(Double.class, ToString.INSTANCE),
+                arguments(void.class, ToString.INSTANCE),
+                arguments(Void.class, ToString.INSTANCE),
+                arguments(String.class, ToString.INSTANCE),
+        };
+    }
 
     @Nested
     @DisplayName("ToString")

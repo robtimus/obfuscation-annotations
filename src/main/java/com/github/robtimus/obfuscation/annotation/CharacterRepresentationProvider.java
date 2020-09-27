@@ -48,6 +48,59 @@ public interface CharacterRepresentationProvider {
     CharSequence toCharSequence(Object value);
 
     /**
+     * Returns a default {@code CharacterRepresentationProvider} instance for a specific type.
+     * This method will return:
+     * <ul>
+     * <li>{@link BooleanArrayToString#INSTANCE} for {@code boolean[]}</li>
+     * <li>{@link CharArrayToString#INSTANCE} for {@code char[]}</li>
+     * <li>{@link ByteArrayToString#INSTANCE} for {@code byte[]}</li>
+     * <li>{@link ShortArrayToString#INSTANCE} for {@code short[]}</li>
+     * <li>{@link IntArrayToString#INSTANCE} for {@code int[]}</li>
+     * <li>{@link LongArrayToString#INSTANCE} for {@code long[]}</li>
+     * <li>{@link FloatArrayToString#INSTANCE} for {@code float[]}</li>
+     * <li>{@link DoubleArrayToString#INSTANCE} for {@code double[]}</li>
+     * <li>{@link ObjectArrayToString#INSTANCE} for {@code Object[]} and sub types</li>
+     * <li>{@link ToString#INSTANCE} for all other cases</li>
+     * </ul>
+     *
+     * @param type The type for which to return a default {@code CharacterRepresentationProvider} instance.
+     * @return A default {@code CharacterRepresentationProvider} instance for the given type.
+     * @throws NullPointerException If the given type is {@code null}.
+     * @since 2.0
+     */
+    static CharacterRepresentationProvider getDefaultInstance(Class<?> type) {
+        Objects.requireNonNull(type);
+        if (type == boolean[].class) {
+            return BooleanArrayToString.INSTANCE;
+        }
+        if (type == char[].class) {
+            return CharArrayToString.INSTANCE;
+        }
+        if (type == byte[].class) {
+            return ByteArrayToString.INSTANCE;
+        }
+        if (type == short[].class) {
+            return ShortArrayToString.INSTANCE;
+        }
+        if (type == int[].class) {
+            return IntArrayToString.INSTANCE;
+        }
+        if (type == long[].class) {
+            return LongArrayToString.INSTANCE;
+        }
+        if (type == float[].class) {
+            return FloatArrayToString.INSTANCE;
+        }
+        if (type == double[].class) {
+            return DoubleArrayToString.INSTANCE;
+        }
+        if (Object[].class.isAssignableFrom(type)) {
+            return ObjectArrayToString.INSTANCE;
+        }
+        return ToString.INSTANCE;
+    }
+
+    /**
      * A character representation provider that uses {@link Object#toString()}.
      *
      * @author Rob Spoor
