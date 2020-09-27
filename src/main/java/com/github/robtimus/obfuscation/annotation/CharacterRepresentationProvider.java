@@ -60,7 +60,7 @@ public interface CharacterRepresentationProvider {
      * <li>{@link FloatArrayToString#INSTANCE} for {@code float[]}</li>
      * <li>{@link DoubleArrayToString#INSTANCE} for {@code double[]}</li>
      * <li>{@link ObjectArrayToString#INSTANCE} for {@code Object[]} and sub types</li>
-     * <li>{@code Identity#INSTANCE} for {@link CharSequence} and sub types</li>
+     * <li>{@link Identity#INSTANCE} for {@link CharSequence} and sub types</li>
      * <li>{@link ToString#INSTANCE} for all other cases</li>
      * </ul>
      *
