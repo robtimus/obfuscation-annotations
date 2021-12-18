@@ -66,9 +66,9 @@ final class ObjectFactoryUtils {
 
     private static <T> Optional<T> findSingleElement(List<T> elements, List<Annotation> annotations, Function<Object, String> errorMessage) {
         switch (elements.size()) {
-        case 0: return Optional.empty();
-        case 1: return Optional.of(elements.get(0));
-        default: throw new IllegalStateException(errorMessage.apply(annotations));
+            case 0: return Optional.empty();
+            case 1: return Optional.of(elements.get(0));
+            default: throw new IllegalStateException(errorMessage.apply(annotations));
         }
     }
 }
