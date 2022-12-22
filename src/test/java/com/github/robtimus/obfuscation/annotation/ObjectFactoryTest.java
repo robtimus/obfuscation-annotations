@@ -168,7 +168,7 @@ class ObjectFactoryTest {
 
         private <T> void testMultipleAnnotations(Function<T, Optional<Obfuscator>> method, T input, Annotation[] annotations) {
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> method.apply(input));
-            assertEquals(Messages.multipleObfuscatorAnnotationsFound.get(Arrays.asList(annotations)), exception.getMessage());
+            assertEquals(Messages.multipleObfuscatorAnnotationsFound(Arrays.asList(annotations)), exception.getMessage());
         }
 
         @Test
@@ -244,7 +244,7 @@ class ObjectFactoryTest {
             Field field = getField("representedByValidImplementation");
             Annotation[] annotations = { field.getAnnotation(RepresentedBy.class), field.getAnnotation(RepresentedBy.class), };
             IllegalStateException exception = assertThrows(IllegalStateException.class, () -> factory.characterRepresentationProvider(annotations));
-            assertEquals(Messages.multipleRepresentedByAnnotationsFound.get(Arrays.asList(annotations)), exception.getMessage());
+            assertEquals(Messages.multipleRepresentedByAnnotationsFound(Arrays.asList(annotations)), exception.getMessage());
         }
 
         @Test

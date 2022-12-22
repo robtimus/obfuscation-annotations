@@ -55,13 +55,13 @@ final class ObjectFactoryUtils {
     }
 
     static Optional<Obfuscator> findSingleObfuscator(List<Obfuscator> obfuscators, List<Annotation> obfuscatorAnnotations) {
-        return findSingleElement(obfuscators, obfuscatorAnnotations, Messages.multipleObfuscatorAnnotationsFound::get);
+        return findSingleElement(obfuscators, obfuscatorAnnotations, Messages::multipleObfuscatorAnnotationsFound);
     }
 
     static Optional<CharacterRepresentationProvider> findSingleCharacterRepresentationProvider(List<CharacterRepresentationProvider> providers,
             List<Annotation> providerAnnotations) {
 
-        return findSingleElement(providers, providerAnnotations, Messages.multipleRepresentedByAnnotationsFound::get);
+        return findSingleElement(providers, providerAnnotations, Messages::multipleRepresentedByAnnotationsFound);
     }
 
     private static <T> Optional<T> findSingleElement(List<T> elements, List<Annotation> annotations, Function<Object, String> errorMessage) {
