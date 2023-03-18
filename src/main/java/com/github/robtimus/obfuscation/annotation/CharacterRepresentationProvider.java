@@ -439,10 +439,21 @@ public interface CharacterRepresentationProvider {
 
         private final Class<T> type;
 
+        /**
+         * Creates a new character representation provider.
+         *
+         * @param type The type for which to return a character representation.
+         */
         protected TypeSpecific(Class<T> type) {
             this.type = type;
         }
 
+        /**
+         * Converts a value into a character representation for the value.
+         *
+         * @param value The non-{@code null} value to convert.
+         * @return A {@code CharSequence} containing the result of converting the value.
+         */
         protected abstract CharSequence convert(T value);
 
         @Override
