@@ -76,7 +76,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link Obfuscator} on.
      * @return An {@link Obfuscator} based on the given annotation.
-     * @throws NullPointerException If the given annotation is null.
+     * @throws NullPointerException If the given annotation is {@code null}.
      */
     default Obfuscator obfuscator(ObfuscateAll annotation) {
         return all(annotation.maskChar());
@@ -87,7 +87,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link Obfuscator} on.
      * @return An {@link Obfuscator} based on the given annotation.
-     * @throws NullPointerException If the given annotation is null.
+     * @throws NullPointerException If the given annotation is {@code null}.
      */
     default Obfuscator obfuscator(ObfuscateNone annotation) {
         Objects.requireNonNull(annotation);
@@ -99,7 +99,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link Obfuscator} on.
      * @return An {@link Obfuscator} based on the given annotation.
-     * @throws NullPointerException If the given annotation is null.
+     * @throws NullPointerException If the given annotation is {@code null}.
      */
     default Obfuscator obfuscator(ObfuscateFixedLength annotation) {
         return fixedLength(annotation.value(), annotation.maskChar());
@@ -110,7 +110,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link Obfuscator} on.
      * @return An {@link Obfuscator} based on the given annotation.
-     * @throws NullPointerException If the given annotation is null.
+     * @throws NullPointerException If the given annotation is {@code null}.
      */
     default Obfuscator obfuscator(ObfuscateFixedValue annotation) {
         return fixedValue(annotation.value());
@@ -121,7 +121,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link Obfuscator} on.
      * @return An {@link Obfuscator} based on the given annotation.
-     * @throws NullPointerException If the given annotation is null.
+     * @throws NullPointerException If the given annotation is {@code null}.
      */
     default Obfuscator obfuscator(ObfuscatePortion annotation) {
         return portion()
@@ -139,7 +139,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link Obfuscator} on.
      * @return An {@link Obfuscator} based on the given annotation.
-     * @throws NullPointerException  If the given annotation is null.
+     * @throws NullPointerException  If the given annotation is {@code null}.
      * @throws IllegalStateException If the annotation's {@link ObfuscateUsing#value() provider type} cannot be {@link #instance(Class) instantiated}.
      */
     default Obfuscator obfuscator(ObfuscateUsing annotation) {
@@ -270,7 +270,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link ObfuscatorProvider} on.
      * @return An {@link ObfuscatorProvider} based on the given annotation.
-     * @throws NullPointerException  If the given annotation is null.
+     * @throws NullPointerException  If the given annotation is {@code null}.
      * @throws IllegalStateException If the annotation's {@link ObfuscateUsing#value() provider type} cannot be {@link #instance(Class) instantiated}.
      */
     default ObfuscatorProvider obfuscatorProvider(ObfuscateUsing annotation) {
@@ -370,7 +370,7 @@ public interface ObjectFactory {
      *
      * @param annotation The annotation to base the returned {@link CharacterRepresentationProvider} on.
      * @return A {@link CharacterRepresentationProvider} based on the given annotation.
-     * @throws NullPointerException  If the given annotation is null.
+     * @throws NullPointerException  If the given annotation is {@code null}.
      * @throws IllegalStateException If the annotation's {@link RepresentedBy#value() provider type} cannot be {@link #instance(Class) instantiated}.
      * @see #characterRepresentationProvider(Class)
      */
