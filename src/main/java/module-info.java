@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 
+/**
+ * Contains general purpose annotations for <a href="https://robtimus.github.io/obfuscation-core">obfuscation-core</a>.
+ *
+ * @author Rob Spoor
+ */
 module com.github.robtimus.obfuscation.annotations {
     requires transitive com.github.robtimus.obfuscation;
 
